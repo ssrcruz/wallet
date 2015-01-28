@@ -6,6 +6,10 @@ class TransactionsController < ApplicationController
   def index
     @transactions = Transaction.all
     @total = Transaction.balance
+    # @total = @transactions.reduce(0) {|sum, i| sum + i.amount}
+    if @total <= 0
+      @negative_total = "Your account has gone below zero!"
+    end
   end
 
   # GET /transactions/1
